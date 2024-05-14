@@ -1,0 +1,65 @@
+import { useState, useContext } from 'react'
+import './style.css'
+
+import logo from '../../assets/logoAgrariaN.png'
+import { Link } from 'react-router-dom'
+import { AuthContext } from '../../contexts/auth'
+import foto1 from '../../assets/gadodecorte.jpg'
+
+
+export default function SignIn(){
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { signIn, loadingAuth } = useContext(AuthContext)
+
+  async function handleSignIn(e){
+    e.preventDefault();
+
+    if(email !== '' && password !== ''){
+      await signIn(email, password);
+    }
+
+  }
+
+
+  return(
+    <div className="container-center">
+      <div className="login">
+        <div className="login-area">
+          <img src={logo} alt="Logo do sistema" />
+          <h1 className='portal'>Portal do Cooperado</h1>
+        </div>
+        <div className='login-div'>
+        <img className='login-img' src={foto1} alt="imagem de fundo login"/>
+
+        <form onSubmit={handleSignIn}>
+          <h1>Entrar</h1>
+          <input 
+            type="text" 
+            placeholder="email@email.com"
+            value={email}
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+
+          <input 
+            type="password" 
+            placeholder="********"
+            value={password}
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+
+          <button type="submit">
+            {loadingAuth ? "Carregando..." : "Acessar"}
+          </button>
+
+          <Link to="/signup">Criar uma conta</Link>
+        </form>
+
+
+        </div>
+
+      </div>
+    </div>
+  )
+}
