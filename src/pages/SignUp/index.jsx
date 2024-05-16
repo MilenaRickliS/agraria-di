@@ -1,28 +1,32 @@
 import { useState, useContext  } from 'react'
 import logo from '../../assets/logoAgrariaN.png';
 import foto1 from '../../assets/gadodecorte.jpg'
-import { Link } from 'react-router-dom'
+import { Navigate, Link, useNavigate } from 'react-router-dom'
 
-import { AuthContext } from '../../contexts/auth'
+import { doCreateUserWithEmailAndPassword } from '../../services/auth'
+import { useAuth } from '../../contexts/authContext'
 
 export default function SignUp(){
-  const [name, setName] = useState('');
+  const { userLoggedIn } = useAuth();
+  const navigate = useNavigate() 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('')
+  const [isRegistering, setIsRegistering] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const { signUp, loadingAuth } = useContext(AuthContext);
-
-  async function handleSubmit(e){
+  const onSubmit = async (e) =>{
     e.preventDefault();
-
-    if(name !== '' && email !== '' && password !== ''){
-     await signUp(email, password, name)
+    if(!isRegistering){
+      setIsRegistering(true)
+      await doCreateUserWithEmailAndPassword(email, password)
     }
-
   }
+  
 
   return(
     <div className="container-center">
+      {userLoggedIn && (<Navigate to={'/'} replace={true}/>)}
       <div className="login">
         <div className="login-area">
           <img src={logo} alt="Logo do sistema" />
@@ -32,14 +36,8 @@ export default function SignUp(){
         <div className='login-div'>
         <img className='login-img' src={foto1} alt="imagem de fundo login"/>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={onSubmit}>
           <h1>Nova conta</h1>
-          <input 
-            type="text" 
-            placeholder="Seu nome"
-            value={name}
-            onChange={ (e) => setName(e.target.value) }
-          />
 
           <input 
             type="text" 
@@ -56,7 +54,7 @@ export default function SignUp(){
           />
 
           <button type="submit">
-            {loadingAuth ? 'Carregando...' : 'Cadastrar'}
+            {isRegistering ? 'Carregando...' : 'Cadastrar'}
           </button>
           <Link to="/signin">Já possui uma conta? Faça login</Link>
         </form>

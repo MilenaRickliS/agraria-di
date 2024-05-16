@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import logo from '../../assets/logoAgrariaN.png';
+import logo from '../../assets/logoAgrariaN.png'
 
 function Header() {
   return (
@@ -10,8 +10,7 @@ function Header() {
         <ul className="navbar-items flexbox-col">
             <li className="navbar-logo flexbox-left">
             <Link to='/' className="link-header navbar-item-inner flexbox">
-                <svg xmlns={logo} id="Layer_1" data-name="Layer 1" viewBox="0 0 1438.88 1819.54">
-                </svg>
+                <img src={logo} alt="logo do sistema" width={60} height={60}/>
             </Link>
             </li>
             <li className="navbar-item flexbox-left">
