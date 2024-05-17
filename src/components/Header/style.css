@@ -165,7 +165,7 @@ ul, ol {
     padding: 1em 0;
     width: 100%;
     position: relative;
-    color: hsl(var(--quite-gray));
+    color: #fff;
     border-radius: .25em;
     text-decoration: none;
     transition: all .2s cubic-bezier(var(--transition-main), 1);
