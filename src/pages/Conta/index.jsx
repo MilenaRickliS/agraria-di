@@ -1,5 +1,6 @@
 import "./style.css";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { useAuth } from "../../contexts/authContext";
 import React from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ function Conta() {
   const {currentUser, userLoggedIn} = useAuth() 
   return (
       <div>
-        <div><Header/>
+        <Header/>
 
         
         <main id="main" class="flexbox-col">
@@ -28,7 +29,7 @@ function Conta() {
           
         }
         </main>        
-        </div>
+        <Footer/>
       </div>
   );
 }

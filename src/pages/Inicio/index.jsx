@@ -4,12 +4,13 @@ import { useAuth } from "../../contexts/authContext";
 import React from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { doSignOut } from "../../services/auth";
+import Footer from "../../components/Footer";
 
 function Inicio() {
   
   return (
       <div>
-        <div><Header/>        
+        <Header/>        
         <main id="main" class="flexbox-col">
           <h2>Estoque</h2>
           <p>Atualize sempre que possível o seu estoque!</p>
@@ -21,9 +22,12 @@ function Inicio() {
           </div>
           
 
-          
-        </main>        
-        </div>
+        
+        </main>         
+        
+        
+        <Footer/> 
+        
       </div>
   );
 }

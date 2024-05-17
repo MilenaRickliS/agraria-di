@@ -1,4 +1,6 @@
 import React, { useEffect, useContext } from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import "./style.css";
 import { useParams } from 'react-router-dom';
 import AppContext from "../../contexts/AppContext";
@@ -7,6 +9,7 @@ import {
     collection,
     onSnapshot
   } from 'firebase/firestore';
+
 
 function Detalhes() {
   const { id } = useParams();
@@ -37,7 +40,9 @@ function Detalhes() {
   }, [id])
 
   return (
-    <div className="container">
+    <div>
+      <Header/>
+    <main id="main" class="flexbox-col">
       {clientes.map((item) => {
         return (
           <article key={item.id}>
@@ -51,6 +56,8 @@ function Detalhes() {
           </article>
         );
       })}
+    </main>
+    <Footer/>
     </div>
   );
 }

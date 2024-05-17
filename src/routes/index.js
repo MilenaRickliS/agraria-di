@@ -28,6 +28,7 @@ function RoutesApp(){
       <Route path="/conta" element={<Private><Conta/></Private>} />
       
       <Route path="/ajuda" element={<Private><Ajuda/></Private>} />
+
     
     </Routes>
   )

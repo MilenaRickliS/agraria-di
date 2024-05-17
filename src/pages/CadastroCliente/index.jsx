@@ -1,5 +1,6 @@
 import "./style.css";
 import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import { Link } from "react-router-dom";
 import AppContext from "../../contexts/AppContext";
 import { useState, useEffect, useContext } from 'react';
@@ -244,6 +245,7 @@ function CadastroCliente() {
         </ul>
           
         </main> 
+        <Footer/>
       </div>
   );
 }

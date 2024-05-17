@@ -9,6 +9,8 @@ function Provider({ children }) {
   // Estado para armazenar a quantidade de ração por semana.
   const [quantRacaoSem, setQuantRacaoSem] = useState('');
   const [clientes, setClientes] = useState([]);
+  const [quantTotal, setQuantTotal] = useState([]);
+
 
   const value = {
     quantRacaoMes,
@@ -16,7 +18,9 @@ function Provider({ children }) {
     quantRacaoSem,
     setQuantRacaoSem,
     clientes,
-    setClientes
+    setClientes,
+    quantTotal,
+    setQuantTotal
   };
 
   return (
