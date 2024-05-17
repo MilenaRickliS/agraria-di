@@ -4,11 +4,19 @@ import AppContext from './AppContext';
 
 function Provider({ children }) {
 
-  const [products, setProducts] = useState([]);
+  // Estado para armazenar a quantidade de ração por mês.
+  const [quantRacaoMes, setQuantRacaoMes] = useState('');
+  // Estado para armazenar a quantidade de ração por semana.
+  const [quantRacaoSem, setQuantRacaoSem] = useState('');
+  const [clientes, setClientes] = useState([]);
 
   const value = {
-    products,
-    setProducts,
+    quantRacaoMes,
+    setQuantRacaoMes,
+    quantRacaoSem,
+    setQuantRacaoSem,
+    clientes,
+    setClientes
   };
 
   return (

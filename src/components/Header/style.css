@@ -21,6 +21,13 @@
     /* Fonts */
     --font-main: "Poppins";
 }
+h2 {
+    font-size: var(--heading-medium);
+}
+p {
+    margin: 0;
+    font-size: var(--paragraph);
+}
 
 /* Links */
 a {
