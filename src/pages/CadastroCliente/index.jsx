@@ -50,7 +50,7 @@ function CadastroCliente() {
         telefone: doc.data().telefone,
         cpf: doc.data().cpf,
         quantAnimais: doc.quantAnimais,   
-        quantRacaoMes: doc.quantRacaoMes,   
+        quantRacaoMes: doc.data().quantRacaoMes,   
     })
     })
     setClientes(listaClientes);
@@ -101,7 +101,7 @@ function CadastroCliente() {
         telefone: doc.data().telefone,
         cpf: doc.data().cpf,
         quantAnimais: doc.quantAnimais,   
-        quantRacaoMes: doc.quantRacaoMes,
+        quantRacaoMes: doc.data().quantRacaoMes,
     })
     })
     setClientes(lista);
@@ -121,7 +121,7 @@ function CadastroCliente() {
       telefone: doc.data().telefone,
       cpf: doc.data().cpf,
       quantAnimais: doc.quantAnimais,   
-      quantRacaoMes: doc.quantRacaoMes,
+      quantRacaoMes: doc.data().quantRacaoMes,
       
     })
     .then(() => {

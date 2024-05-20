@@ -211,6 +211,7 @@ ul, ol {
 #main {
     margin: 0 0 0 5em;
     min-height: 50vh;
+    outline: none;
 }
 #main > h2 {
     width: 80%;

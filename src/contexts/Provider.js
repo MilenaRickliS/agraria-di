@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import propTypes from 'prop-types';
 import AppContext from './AppContext';
 
@@ -10,6 +10,8 @@ function Provider({ children }) {
   const [quantRacaoSem, setQuantRacaoSem] = useState('');
   const [clientes, setClientes] = useState([]);
   const [quantTotal, setQuantTotal] = useState([]);
+  const totalRef = useRef(null);
+  
 
 
   const value = {
@@ -20,7 +22,8 @@ function Provider({ children }) {
     clientes,
     setClientes,
     quantTotal,
-    setQuantTotal
+    setQuantTotal,
+    totalRef    
   };
 
   return (
