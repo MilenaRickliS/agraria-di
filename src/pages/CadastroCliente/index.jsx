@@ -18,6 +18,8 @@ import {
 } from 'firebase/firestore';
 
 function CadastroCliente() { 
+  const [filter, setFilter] = useState([])
+  const [search, setSearch] = useState("")
   //context para armazenar a quantidade de ração dos clientes
   const { quantRacaoMes, setQuantRacaoMes, clientes, setClientes} = useContext(AppContext);
   // Estado para armazenar o nome.
@@ -155,59 +157,59 @@ function CadastroCliente() {
         <main id="main" class="flexbox-col">
           <h2>Clientes</h2>
           <p>Cadastre um novo cliente aqui!</p>
-          <hr/>
+          <br></br>
       
-      <div className="container">
+      <div className="container-cadastro">
         <label>ID:</label>
-        <input
+        <input className="form-cadastro"
         placeholder='Digite o ID do Cliente'
         value={idCliente}
         onChange={ (e) => setIdCliente(e.target.value) }
-        /> <br/>
+        /> 
         <label>Nome:</label>
-        <input
+        <input className="form-cadastro"
         placeholder='Digite o nome completo'
         value={nome}
         onChange={ (e) => setNome(e.target.value) }
         /> <br/>
         <label>Propriedade:</label>
-        <textarea
+        <input className="form-cadastro"
         type="text"
         placeholder='Digite o nome de propriedade'
         value={propriedade}
         onChange={ (e) => setPropriedade(e.target.value) }
         />
         <label>CPF/CNPJ:</label>
-        <input
+        <input className="form-cadastro"
         type="text"
         placeholder='Digite o CPF ou CNPJ'
         value={cpf}
         onChange={ (e) => setCpf(e.target.value) }
-        />
+        /><br/>
         <label>Email:</label>
-        <input
+        <input className="form-cadastro"
         type="text"
         placeholder="Digite o email do cliente"
         value={emailCliente}
         onChange={(e) => setEmailCliente(e.target.value) }
         />
         <label>Telefone:</label>
-        <input
+        <input className="form-cadastro"
         type="text"
         placeholder="Digite o telefone do cliente"
         value={telefone}
         onChange={(e) => setTelefone(e.target.value) }
-        />
+        /><br/>
         <label>Quantidade de animais(gado de corte):</label>
-        <input
+        <input className="form-cadastro"
         type="number"
         placeholder="Digite a quantidade que possui de animais"
         value={quantAnimais}
         onChange={(e) => setQuantAnimais(e.target.value) }
-        />
+        /><br/>
 
         <label>Quantidade de ração por mês:</label>
-        <input
+        <input className="form-cadastro"
         type="number"
         placeholder="Digite a quantidade de ração por mês"
         value={quantRacaoMes}
@@ -215,29 +217,30 @@ function CadastroCliente() {
         />
 
         <div>
-          <button onClick={handleAdd}>Adicionar</button>
-          <button onClick={buscarClientes}>Buscar Cliente</button>
-          <button onClick={editarCliente}>Editar Cliente</button>
+          <button className="button-cadastro" onClick={handleAdd}>Adicionar</button>
+          {/* <button className="button-cadastro" onClick={buscarClientes}>Buscar Cliente</button> */}
+          <button className="button-cadastro" onClick={editarCliente}>Editar Cliente</button>
         </div>
 
       </div>
-
+      <br></br><br/>
           <p>Aqui está uma lista de todos os seus clientes!</p>
+          <br/><br/>
           <div className="input-group">
               <input className='pesquisar' type="search" placeholder="Pesquisar ..."/>
               <div class="input-group-append">
                 <div class="input-group-text"><ion-icon name="search-outline"></ion-icon></div>
               </div>
           </div>
-          <ul>
+          <ul className="list">
           {clientes.map( (cliente) => {
             return(
             <li key={cliente.id}>
               <strong>ID: {cliente.id}</strong> <br/>
               <span>Nome: {cliente.nome} </span> <br/>
               <span>Propriedade: {cliente.propriedade}</span> <br/>
-              <button onClick={ () => excluirCliente(cliente.id) }>Excluir</button> <br/> <br/>
-              <button><Link to={`/detalhes/${cliente.id}`}>Saiba Mias!</Link></button>
+              <button className="list-button"><Link className="list-button" to={`/detalhes/${cliente.id}`}>Saiba Mais!</Link></button>
+              <button onClick={ () => excluirCliente(cliente.id) } className="lixo"> <i className="bx bx-trash"></i></button> <br/><br/>
             </li>
 
             )

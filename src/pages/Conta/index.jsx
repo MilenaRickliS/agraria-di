@@ -22,7 +22,7 @@ function Conta() {
           userLoggedIn
           ?
           <>
-        <button onClick={()=>{doSignOut().then(() =>{navigate('/signin')})}}>Logout</button>
+        <button className="button-cadastro" onClick={()=>{doSignOut().then(() =>{navigate('/signin')})}}>Logout</button>
           </>
           :
         <Link to='/signin'>login</Link>
