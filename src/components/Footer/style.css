@@ -1,6 +1,6 @@
 
 footer {
-    padding: 138px 20%;
+    padding: 100px;
     box-shadow: 0 0 40px 10px #0000001d;
     background-color: #113e1d;
 }
@@ -88,9 +88,4 @@ footer nav.menu-footer ul li {
             font-size: 15px;
         }
     }
-    @media only screen and (max-width: 546px){
-        footer {
-            padding: 138px 30%;
-            
-        }
-    }
+    
