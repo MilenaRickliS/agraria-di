@@ -35,6 +35,8 @@ function CadastroCliente() {
   const [cpf, setCpf] = useState('');
   // Estado para armazenar quantidade de cabeça de gado.
   const [quantAnimais, setQuantAnimais] = useState('');
+
+  
   
 
   // Efeito que carrega os clientes do Firestore sempre que o componente é montado.

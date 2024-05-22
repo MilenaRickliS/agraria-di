@@ -17,16 +17,52 @@ import {
 } from 'firebase/firestore';
 
 const Inicio = () => {
+  //context para armazenar a quantidade de ração dos clientes
+  const { quantRacaoMes, setQuantRacaoMes} = useContext(AppContext);
   const [items, setItems] = useState([]);
   const [descItem, setDescItem] = useState("");
   const [amount, setAmount] = useState("");
   const [type, setType] = useState("Entrada");
   const [searchQuery, setSearchQuery] = useState("");
+  const [lista, setLista] = useState([])
 
   const { totalRef } = useContext(AppContext);
 
   const incomesRef = useRef(null);
   const expensesRef = useRef(null);
+  const racaoRef = useRef(null);
+  const totalFinalRef = useRef(null);
+
+   // Efeito que carrega os clientes do Firestore sempre que o componente é montado.
+   useEffect(() => {
+    async function loadClientes(){
+    const unsub = onSnapshot(collection(db, "clientes-di"), (snapshot) => {
+    let listaClientes = [];
+    snapshot.forEach((doc) => {
+      listaClientes.push({ 
+        quantRacaoMes: doc.data().quantRacaoMes,   
+    })
+    })
+    setLista(listaClientes);
+    })
+    }
+    loadClientes();
+  }, [])
+  
+  const getTotalsRacao = () => {
+    let totalRacao = 0;
+    lista.forEach((item) => {
+      totalRacao += item.quantRacaoMes;
+    });
+    if (racaoRef.current) {
+      racaoRef.current.innerHTML = totalRacao;
+    }
+    const totalFinal = totalRacao - totalRef;
+    if (totalFinalRef.current) {
+      totalFinalRef.current.innerHTML = totalFinal;
+    }
+  };
+  
 
   // Efeito que carrega do Firestore sempre que o componente é montado.
   useEffect(() => {
@@ -108,6 +144,7 @@ const Inicio = () => {
 
   useEffect(() => {
     getTotals();
+    getTotalsRacao();
   }, [items]);
 
   const handleSearch = (event) => {
@@ -218,6 +255,11 @@ const Inicio = () => {
               )
             })}</tbody>
           </table>
+        </div>
+        <div>
+          <p>Total em seu estoque: <span ref={totalRef}>0.00</span></p>
+          <p>Total que seus clientes precisam no mês: <span ref={racaoRef}>0.00</span></p>
+          <p>Diferença: <span ref={totalFinalRef}>0.00</span> </p>
         </div>
       </main>
       <div>
