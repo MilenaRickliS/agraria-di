@@ -18,8 +18,7 @@ import {
 } from 'firebase/firestore';
 
 function CadastroCliente() { 
-  const [filter, setFilter] = useState([])
-  const [search, setSearch] = useState("")
+  const [filteredClientes, setFilteredClientes] = useState([]);
   //context para armazenar a quantidade de ração dos clientes
   const { quantRacaoMes, setQuantRacaoMes, clientes, setClientes} = useContext(AppContext);
   // Estado para armazenar o nome.
@@ -112,6 +111,17 @@ function CadastroCliente() {
       console.log("DEU ALGUM ERRO AO BUSCAR");
     })
   }
+  const handleSearch = (event) => {
+    const searchQuery = event.target.value.toLowerCase();
+    const filtered = clientes.filter((cliente) => {
+      return (
+        cliente.nome.toLowerCase().includes(searchQuery) ||
+        cliente.propriedade.toLowerCase().includes(searchQuery)
+      );
+    });
+    setFilteredClientes(filtered);
+  };
+  
 
   // Função para editar um cliente existente no Firestore.
   async function editarCliente(){
@@ -227,25 +237,30 @@ function CadastroCliente() {
           <p>Aqui está uma lista de todos os seus clientes!</p>
           <br/><br/>
           <div className="input-group">
-              <input className='pesquisar' type="search" placeholder="Pesquisar ..."/>
+              <input className='pesquisar' type="search" placeholder="Pesquisar ..." onChange={handleSearch}/>
               <div class="input-group-append">
                 <div class="input-group-text"><ion-icon name="search-outline"></ion-icon></div>
               </div>
           </div>
           <ul className="list">
-          {clientes.map( (cliente) => {
-            return(
-            <li key={cliente.id}>
-              <strong>ID: {cliente.id}</strong> <br/>
-              <span>Nome: {cliente.nome} </span> <br/>
-              <span>Propriedade: {cliente.propriedade}</span> <br/>
-              <button className="list-button"><Link className="list-button" to={`/detalhes/${cliente.id}`}>Saiba Mais!</Link></button>
-              <button onClick={ () => excluirCliente(cliente.id) } className="lixo"> <i className="bx bx-trash"></i></button> <br/><br/>
-            </li>
-
-            )
-          })}
-        </ul>
+            {filteredClientes.length ? (
+              filteredClientes.map((cliente) => {
+                return (
+                  <li key={cliente.id}>
+                    <strong>ID: {cliente.id}</strong> <br/>
+                    <span>Nome: {cliente.nome} </span> <br/>
+                    <span>Propriedade: {cliente.propriedade}</span> <br/>
+                    <button className="list-button"><Link className="list-button" to={`/detalhes/${cliente.id}`}>Saiba Mais!</Link></button>
+                    <button onClick={ () => excluirCliente(cliente.id) } className="lixo"> <i className="bx bx-trash"></i></button> <br/><br/>
+                  </li>
+                );
+              })
+            ) : (
+              <li>
+                <strong>Cliente não encontrado... :(</strong>
+              </li>
+            )}
+          </ul>
           
         </main> 
         <Footer/>

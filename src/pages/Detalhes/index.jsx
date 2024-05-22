@@ -15,6 +15,7 @@ function Detalhes() {
   const { id } = useParams();
   //context para armazenar clientes
   const { clientes, setClientes} = useContext(AppContext);
+  const [cliente, setCliente] = React.useState(null);
 
   // Efeito que carrega os clientes do Firestore sempre que o componente é montado.
   useEffect(() => {
@@ -29,33 +30,34 @@ function Detalhes() {
         email: doc.data().email,
         telefone: doc.data().telefone,
         cpf: doc.data().cpf,
-        quantAnimais: doc.quantAnimais,   
-        quantRacaoMes: doc.quantRacaoMes,   
+        quantAnimais: doc.data().quantAnimais,   
+        quantRacaoMes: doc.data().quantRacaoMes,   
     })
     })
     setClientes(listaClientes);
+    setCliente(listaClientes.find(cliente => cliente.id === id));
     })
     }
     loadClientes();
   }, [id])
 
+  if (!cliente) {
+    return <div>Carregando...</div>;
+  }
+
   return (
     <div>
       <Header/>
     <main id="main" class="flexbox-col">
-      {clientes.map((item) => {
-        return (
-          <article key={item.id}>
-            <strong>{item.nome}</strong>
-            <p >{item.propriedade}</p>
-            <p >{item.cpf}</p>
-            <p >{item.email}</p>
-            <p >{item.telefone}</p>
-            <p >{item.quantAnimais}</p>
-            <p >{item.quantRacaoMes}</p>
-          </article>
-        );
-      })}
+      <article className="container-cadastro">
+        <strong>Nome: {cliente.nome}</strong>
+        <p >Propriedade: {cliente.propriedade}</p>
+        <p >CPF/CNPJ: {cliente.cpf}</p>
+        <p >E-mail: {cliente.email}</p>
+        <p >Telefone: {cliente.telefone}</p>
+        <p >Quant.Animais: {cliente.quantAnimais}</p>
+        <p >Quant. de Ração: {cliente.quantRacaoMes}</p>
+      </article>
     </main>
     <Footer/>
     </div>
